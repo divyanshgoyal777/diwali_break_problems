@@ -32,35 +32,21 @@ function isEqual(a, b) {
   return isObjectEqual(a, b);
 }
 
-function getSymbol(isPassed) {
-  return isPassed ? "✅" : "❌";
-}
-
-function getMessage(isPassed, result, expected) {
-  return isPassed ? "" : `\nExpected: ${expected} \nActual: ${result}`;
-}
-
-function test(a, b, expected) {
-  const result = isEqual(a, b);
-  const isPassed = result === expected;
-  const symbol = getSymbol(isPassed);
-  const message = getMessage(isPassed, result, expected);
-  console.log(a, "===", b, symbol, message);
-};
-
-test({ a: undefined }, { b: 1 }, false);
-test({ b: 1 }, { a: undefined }, false); // false
-test(1, 1, true); // true
-test("a", "a", true); // true
-test([], [], true); // true
-test([1], [1], true); // true
-test([1], [1, 2], false); // false
-test(1, "1", false); // false
-test({ a: 1 }, { a: 1 }, true); // true
-test({ a: 1 }, { b: 1 }, false); // false
-test({ a: [1] }, { a: [1] }, true); // true
-test({ a: { b: 1 } }, { a: { b: 1 } }, true); // true
-test(
-  ({ name: "Alice", address: { city: "Delhi" } }),
-  ({ name: "Alice", address: { city: "Delhi" } })
-  , true); // true
+console.log(isEqual({ a: undefined }, { b: 1 })); // false
+console.log(isEqual({ b: 1 }, { a: undefined })); // false
+console.log(isEqual(1, 1)); // true
+console.log(isEqual("a", "a")); // true
+console.log(isEqual([], [])); // true
+console.log(isEqual([1], [1])); // true
+console.log(isEqual([1], [1, 2])); // false
+console.log(isEqual(1, "1")); // false
+console.log(isEqual({ a: 1 }, { a: 1 })); // true
+console.log(isEqual({ a: 1 }, { b: 1 })); // false
+console.log(isEqual({ a: [1] }, { a: [1] })); // true
+console.log(isEqual({ a: { b: 1 } }, { a: { b: 1 } })); // true
+console.log(
+  isEqual(
+    { name: "Alice", address: { city: "Delhi" } },
+    { name: "Alice", address: { city: "Delhi" } },
+  ),
+); // true
