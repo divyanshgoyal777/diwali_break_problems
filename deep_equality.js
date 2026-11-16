@@ -30,12 +30,15 @@ function isEqual(a, b) {
   if (keysA.length !== keysB.length) return false;
 
   for (const key in a) {
+    if (!keysB.includes(key)) return false;
     if (!isEqual(a[key], b[key])) return false;
   }
 
   return true;
 }
 
+console.log(isEqual({ a: undefined }, { b: 1 })); // false
+console.log(isEqual({ b: 1 }, { a: undefined })); // false
 console.log(isEqual(1, 1)); // true
 console.log(isEqual("a", "a")); // true
 console.log(isEqual([], [])); // true
