@@ -1,22 +1,6 @@
-function isArrayEqual(a, b) {
-  if (a.length !== b.length) return false;
-
-  for (let i = 0; i < a.length; i++) {
-    if (!isEqual(a[i], b[i])) return false;
-  }
-
-  return true;
-}
-
-function isObjectEqual(a, b) {
-  const keysA = Object.keys(a);
-  const keysB = Object.keys(b);
-
-  if (keysA.length !== keysB.length) return false;
-
+function checkElements(a, b) {
   for (const key in a) {
-    if (!keysB.includes(key)) return false;
-    if (!isEqual(a[key], b[key])) return false;
+    if (!isEqual(a[key], b[key]) || !Object.keys(b).includes(key)) return false;
   }
 
   return true;
@@ -24,14 +8,14 @@ function isObjectEqual(a, b) {
 
 function isEqual(a, b) {
   if (a === b) return true;
-
   if (a === null || b === null || typeof a !== "object" || typeof b !== "object") return false;
+  if (Array.isArray(a) && Array.isArray(b) && a.length === b.length) return checkElements(a, b);
+  if (!Array.isArray(a) && !Array.isArray(b) && Object.keys(a).length === Object.keys(b).length) return checkElements(a, b);
 
-  if (Array.isArray(a) && Array.isArray(b)) return isArrayEqual(a, b);
-
-  return isObjectEqual(a, b);
+  return false;
 }
 
+console.log(isEqual({}, [])); // false
 console.log(isEqual({ a: undefined }, { b: 1 })); // false
 console.log(isEqual({ b: 1 }, { a: undefined })); // false
 console.log(isEqual(1, 1)); // true
