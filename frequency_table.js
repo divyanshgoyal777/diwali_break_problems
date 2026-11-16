@@ -23,11 +23,6 @@ const array = [
 ];
 const frequency = {};
 
-// for (const element of array) {
-//   if (frequency[element]) frequency[element] = frequency[element] + 1;
-//   else frequency[element] = 1;
-// }
-
 for (const element of array) {
   frequency[element] = (frequency[element] || 0) + 1;
 }
