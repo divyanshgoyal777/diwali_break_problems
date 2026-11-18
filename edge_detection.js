@@ -2,9 +2,9 @@ function detectEdge(row, col, pixel, bitmap, threshold) {
   const isBottomInside = row + 1 < bitmap.length;
   const isRightInside = col + 1 < bitmap[row].length;
 
-  const isBottomGreater =
-    isRightInside && Math.abs(pixel - bitmap[row][col + 1]) > threshold;
   const isRightGreater =
+    isRightInside && Math.abs(pixel - bitmap[row][col + 1]) > threshold;
+  const isBottomGreater =
     isBottomInside && Math.abs(pixel - bitmap[row + 1][col]) > threshold;
 
   return isRightGreater || isBottomGreater ? 255 : 0;
